@@ -9,8 +9,14 @@ class TTTBoard:
         board - a list of '*'s, 'X's & 'O's. 'X's represent moves by player 'X', 'O's
             represent moves by player 'O' and '*'s are spots no one has yet played on
     """
-
-    pass
+    def __init__(self):
+        """Intitializes a 3x3 tic tac toe board
+        """
+        self.board = ["*"] * 9
+    
+    def __str__(self):
+        """Return a string represetnation of the board"""
+        return (f"{self.board[0:3]} \nf"{self.board[3:6]} \nf"{self.board[6:8]})
 
 
 def play_tic_tac_toe() -> None:
