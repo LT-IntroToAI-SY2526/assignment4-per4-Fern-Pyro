@@ -16,7 +16,7 @@ class TTTBoard:
     
     def __str__(self):
         """Return a string represetnation of the board"""
-        print(f"{self.board[0:3]} \n{self.board[3:6]} \n{self.board[6:9]}")
+        return f"{self.board[0]} {self.board[1]} {self.board[2]}\n{self.board[3]} {self.board[4]} {self.board[5]}\n{self.board[6]} {self.board[6]} {self.board[8]}"#{self.board[0:3]} \n{self.board[3:6]} \n{self.board[6:9]}"
     
     def make_move(self, player, pos):
         """Places a move for player in the position pos (where the board squares are numbered from left to right,
@@ -24,83 +24,38 @@ class TTTBoard:
         if possible. 'player' is a string ("X" or "O") and pos is an integer. 
         Returns True if the move was made and False if not (because the spot was full, or outside the boundaries of the board).
         """
-        if pos < 0 or pos >= 8:
-            return False
-        if self.board[pos] == "X" or self.board[pos] == "O":
-            return False
-        else:
+        if 0 <= pos <=8 and self.board[pos] == '*':
             self.board[pos] = player
             return True
+        return False
     
     def has_won(self, player):
-        """Returns True if player has won the game, and false if not"""
-        result = False
-        check = []
-        if self.board[0:3] == player:
-            result = True
-        if self.board[3:6] == player:
-            result = True
-        if self.board[6:9] == player:
-            result = True
-        indexes_to_check = [0,3,6]
-        for index in indexes_to_check:
-            if self.board[index] == player:
-                check.append(True)
-            else:
-                check.append(False)
-            if False not in check:
-                result = True
-            else:
-                result = False
-        indexes_to_check = [1,4,7]
-        for index in indexes_to_check:
-            if self.board[index] == player:
-                check.append(True)
-            else:
-                check.append(False)
-            if False not in check:
-                result = True
-            else:
-                result = False
-        indexes_to_check = [2,5,8]
-        for index in indexes_to_check:
-            if self.board[index] == player:
-                check.append(True)
-            else:
-                check.append(False)
-            if False not in check:
-                result = True
-            else:
-                result = False
-        indexes_to_check = [0,4,8]
-        for index in indexes_to_check:
-            if self.board[index] == player:
-                check.append(True)
-            else:
-                check.append(False)
-            if False not in check:
-                result = True
-            else:
-                result = False
-        indexes_to_check = [2,4,6]
-        for index in indexes_to_check:
-            if self.board[index] == player:
-                check.append(True)
-            else:
-                check.append(False)
-            if False not in check:
-                result = True
-            else:
-                result = False
-        return result
+        """Check if the given player has won the game
+
+        Args:
+            player - the player to check either X or O
+        Return:
+            True is the player one, flase otherwise
+        """
+        check = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [0,4,8],
+            [2,4,6],
+        ]
+
+        for combo in check:
+            if self.board[combo[0]] == self.board[combo[1]] == self.board[combo[2]] == player:
+                 return True
+        return False
     
-        #8 different ways to win, so 8 if statements
-    
-    # def game_over(self):
-    #     if has_won(self.board) == True:
-    #         return True
-    #     else:
-    #         return False
+    def game_over(self):
+        """Checks if the game is over - someone has won or the board is full"""
+        return self.has_won("X") or self.has_won("O") or '*' not in self.board
         
     def clear(self):
         self.board = ["*"] * 9
