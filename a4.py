@@ -16,7 +16,7 @@ class TTTBoard:
     
     def __str__(self):
         """Return a string represetnation of the board"""
-        return f"{self.board[0]} {self.board[1]} {self.board[2]}\n{self.board[3]} {self.board[4]} {self.board[5]}\n{self.board[6]} {self.board[6]} {self.board[8]}"#{self.board[0:3]} \n{self.board[3:6]} \n{self.board[6:9]}"
+        return f"{self.board[0]} {self.board[1]} {self.board[2]}\n{self.board[3]} {self.board[4]} {self.board[5]}\n{self.board[6]} {self.board[7]} {self.board[8]}"#{self.board[0:3]} \n{self.board[3:6]} \n{self.board[6:9]}"
     
     def make_move(self, player, pos):
         """Places a move for player in the position pos (where the board squares are numbered from left to right,
@@ -136,4 +136,4 @@ if __name__ == "__main__":
     print("All tests passed!")
 
     # uncomment to play!
-    # play_tic_tac_toe()
+    play_tic_tac_toe()
